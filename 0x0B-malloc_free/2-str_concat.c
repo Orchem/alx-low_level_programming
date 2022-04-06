@@ -1,66 +1,53 @@
-#include "main.h"
-#include "stdlib.h"
-/**
- *str_concat-concanates 2 strings.
- *@s1:First string.
- *@s2:second string.
- *Return: Pointer to memory containing concatenated string.
- */
+#include "holberton.h"
+#include <stdlib.h>
+#include <stdio.h>
 
+/**
+  * str_concat - Concatenates two strings of any size
+  * @s1: the first string to concatenate
+  * @s2: the second string to concatenate
+  *
+  * Return: the two strings concatenated
+  */
 char *str_concat(char *s1, char *s2)
 {
-	int size, j, k, size2;
-	char *memstorage;
+	int i = 0, j = 0, k = 0, l = 0;
+	char *s;
 
-	size = _strlen(s1);
-	size2 = _strlen(s2);
 	if (s1 == NULL)
-	{
 		s1 = "";
-	}
-	if (s1 == NULL)
-	{
+
+	if (s2 == NULL)
 		s2 = "";
-	}
 
-/*allocate memory for the full string.*/
-	memstorage = malloc(size + size2);
-	if (memstorage == NULL)
-	{
-		return (NULL);
-	}
+	while (s1[i])
+		i++;
 
-/*copy string one into memory.*/
-	for (j = 0; j < size; j++)
-	{
-		memstorage[j] = s1[j];
-	}
-/*copy string two into memory.*/
-	for (k = 0; k < size2; k++)
-	{
-		memstorage[j] = s2[k];
+	while (s2[j])
 		j++;
-	}
-/*Put null character at the end of the string.*/
-	memstorage[++j] = '\0';
-	return (memstorage);
-}
 
+	l = i + j;
+	s = malloc((sizeof(char) * l) + 1);
 
-/**
- *_strlen-Finds the length of a string.
- *@s:String pointer to the string whose length is to be found.
- *
- *Return: returns the length of the string.
- */
+	if (s == NULL)
+		return (NULL);
 
-int _strlen(char *s)
-{
-	int p = 0;
-/*incremeant up to when the last character is NULL,\0*/
-	while (*(s + p) != 0)
+	j = 0;
+
+	while (k < l)
 	{
-		p++;
+		if (k <= i)
+			s[k] = s1[k];
+
+		if (k >= i)
+		{
+			s[k] = s2[j];
+			j++;
+		}
+
+		k++;
 	}
-	return (p);
+
+	s[k] = '\0';
+	return (s);
 }
