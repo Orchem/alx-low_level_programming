@@ -1,0 +1,10 @@
+# USAGE:
+# make # compile file main.c and school.c
+
+.PHONY = all
+
+CC = gcc
+SRC = main.c school.c
+
+all: ${SRC}
+	${CC} ${SRC}  -o school
